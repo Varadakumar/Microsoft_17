@@ -1,6 +1,7 @@
 package evaluation;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -12,6 +13,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TC017_Microsoft {
+	
+	private static final String PATH = "D:\\835File\\Multifile";
+}
 //Evaluation
 	public static void main(String[] args) throws InterruptedException {
 		System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver.exe");
@@ -56,7 +60,7 @@ public class TC017_Microsoft {
 
 		//8) Set the Duration as 180000 seconds
 		driver.findElementByName("seconds").clear();
-		driver.findElementByName("seconds").sendKeys("80000");
+		driver.findElementByName("seconds").sendKeys("180000");
 
 		//9) Select the Memory as 4GB
 		WebElement memory = driver.findElementByName("memory");
@@ -83,7 +87,7 @@ public class TC017_Microsoft {
 
 		//14) Verify the downloded file in the local folder
 		Thread.sleep(3000);
-		File file = new File("C:\\Users\\kunch\\Downloads\\ExportedEstimate.xlsx");
+		File file = new File("C:\\Users\\varada\\Downloads\\ExportedEstimate.xlsx");
 		if(file.exists()){
 			System.out.println("Estimate Downloaded successfully");
 		}	else	{
@@ -92,7 +96,7 @@ public class TC017_Microsoft {
 
 
 		//15) Navigate to Example Scenarios and Select CI/CD for Containers
-		Thread.sleep(3000);
+		Thread.sleep(4000);
 		WebElement examplescenario = driver.findElementByXPath("//a[text()='Example Scenarios']");
 		Actions builder = new Actions(driver);
 		builder.moveToElement(examplescenario).click().build().perform();
@@ -101,7 +105,7 @@ public class TC017_Microsoft {
 
 		//16) Click Add to Estimate
 		JavascriptExecutor js = (JavascriptExecutor) driver;	
-		js.executeScript("window.scrollBy(0,500)");
+		js.executeScript("window.scrollBy(0,600)");
 
 		Thread.sleep(2000);
 		driver.findElementByXPath("//button[text()='Add to estimate']").click();
@@ -121,12 +125,19 @@ public class TC017_Microsoft {
 
 		//20) Verify the downloded file in the local folder
 		Thread.sleep(3000);
-		File file1 = new File("C:\\Users\\kunch\\Downloads\\ExportedEstimate.xlsx");
-		if(file1.exists()){
-			System.out.println("CI/CD Estimate Downloaded successfully");
-		}	else	{
-			System.out.println("CI/CD Estimate does not exists in the expected folder");
-		}
+		
+		 File fileName = new File(PATH);
+	        FilenameFilter fileFilter = new FilenameFilter(){
+	            public boolean accept(File fileName, String name) {
+	                String lowercaseName = name.toLowerCase();
+	                if (lowercaseName.endsWith("ExportedEstimate.xlsx")) {
+	                    return true;
+	                } else {
+	                	tem.out.println("CI/CD Estimate does not exists in the expected folder");
+	                    return false;
+	                }
+	            }
+		
 	}
 
 }
