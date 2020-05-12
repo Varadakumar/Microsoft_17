@@ -131,9 +131,10 @@ public class TC017_Microsoft {
 	            public boolean accept(File fileName, String name) {
 	                String lowercaseName = name.toLowerCase();
 	                if (lowercaseName.endsWith("ExportedEstimate.xlsx")) {
+	                	System.out.println("CI/CD Estimate Downloaded successfully");
 	                    return true;
 	                } else {
-	                	tem.out.println("CI/CD Estimate does not exists in the expected folder");
+	                	System.out.println("CI/CD Estimate does not exists in the expected folder");
 	                    return false;
 	                }
 	            }
